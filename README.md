@@ -7,7 +7,7 @@ Allows for the exporting of metrics from Azure applications using the [Azure mon
 ## Install
 
 ```bash
-go get -u github.com/RobustPerception/azure_metrics_exporter
+go get -u github.com/arvacims/azure_metrics_exporter
 ```
 
 ## Usage
