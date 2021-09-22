@@ -18,7 +18,7 @@ pkgs   = $(shell $(GO) list ./... | grep -v /vendor/)
 PREFIX                  ?= $(shell pwd)
 BIN_DIR                 ?= $(shell pwd)
 DOCKER_REPO             ?= arvacims
-DOCKER_IMAGE_NAME       ?= azure_metrics_exporter
+DOCKER_IMAGE_NAME       ?= azure-metrics-exporter
 DOCKER_IMAGE_TAG        ?= $(subst /,-,$(shell git rev-parse --abbrev-ref HEAD))
 
 all: format build test
