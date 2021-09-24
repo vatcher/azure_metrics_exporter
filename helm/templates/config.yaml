@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "exporter-config"
+  labels:
+    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+data:
+  azure.yml: |
+    {{- .Values.configYaml | nindent 4 }}

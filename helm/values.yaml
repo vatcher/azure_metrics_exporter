@@ -1,0 +1,48 @@
+replicaCount: 1
+
+image:
+  repository: arvacims/azure-metrics-exporter
+  pullPolicy: IfNotPresent
+  tag: "1.0.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 9276
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+configYaml: |
+  active_directory_authority_url: "https://login.microsoftonline.com/"
+  resource_manager_url: "https://management.azure.com/"
+  credentials:
+    subscription_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    tenant_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    client_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    client_secret: "<secret>"
+  resource_groups:
+    - resource_group: "test"
+      resource_types:
+        - "Microsoft.DBForPostgreSQL/servers"
+      resource_name_include_re:
+        - ".+"
+      metrics:
+        - name: "cpu_percent"
+    - resource_group: "test"
+      resource_types:
+        - "Microsoft.ServiceBus/namespaces"
+      resource_name_include_re:
+        - ".+"
+      resource_name_exclude_re:
+        - "dev-.+"
+      metrics:
+        - name: "NamespaceCpuUsage"
