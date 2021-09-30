@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "azure-metrics-exporter.fullname" . }}
+  labels:
+    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "azure-metrics-exporter.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: http
+      path: /metrics
